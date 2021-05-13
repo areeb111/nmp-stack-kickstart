@@ -10,6 +10,8 @@ curl -s https://raw.githubusercontent.com/areeb111/nmp-stack-kickstart/main/inst
 ```
 
 There are 5 options to install your required stack.
+![NMP Stack Screenshot](/screenshot.png?raw=true "NMP Stack Screenshot")
+
 
 PRs are welcome
 Tested on CentOS-7-x86_64-Minimal-2009
