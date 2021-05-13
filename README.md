@@ -13,7 +13,9 @@ There are 5 options to install your required stack.
 ![NMP Stack Screenshot](/screenshot.png?raw=true "NMP Stack Screenshot")
 
 
-PRs are welcome
-Tested on CentOS-7-x86_64-Minimal-2009
+- PRs are welcome
 
-NOTE: THIS INSTALLER IS NOT DESIGNED FOR PRODUCTION, PLEASE READ EVERY LINE BEFORE EXECUTING.
+- Tested on CentOS-7-x86_64-Minimal-2009
+
+
+**NOTE: THIS INSTALLER IS NOT DESIGNED FOR PRODUCTION, PLEASE READ EVERY LINE BEFORE EXECUTING.**
