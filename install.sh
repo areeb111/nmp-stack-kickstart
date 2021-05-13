@@ -88,9 +88,9 @@ create_db() {
     DBPASS="${3}"
 
 	#CREATING MYSQL USER WITH GRANT PRIVILEGES & DATABASE
-	mysql -e "create user '${DBUSER}'@'localhost' identified by ${DBPASS};"
-	mysql -e "grant all privileges on *.* to '${DBUSER}'@'localhost' with grant option;"
-	mysql -e "create database ${DBNAME}";
+	mysql -e "CREATE USER ${DBUSER}@'localhost' IDENTIFIED BY ${DBPASS};"
+	mysql -e "GRANT ALL PRIVILEGES ON *.* TO ${DBUSER}@'localhost' with GRANT OPTION;"
+	mysql -e "CREATE DATABASE ${DBNAME}";
 	mysql -e "ALTER DATABASE ${DBNAME} DEFAULT CHARSET=utf8 COLLATE utf8_general_ci";
 
 	echo "Database has been created successfully."
@@ -113,7 +113,7 @@ configure_nginx() {
 		root   /var/www/html;
 		location / {
                 index index.php index.html index.htm;
-                try_files $uri $uri/ /index.php?$query_string;
+                try_files \$uri \$uri/ /index.php?\$query_string;
     	}	
 
     	add_header 'X-Frame-Options' 'DENY';
@@ -124,12 +124,12 @@ configure_nginx() {
 
     	server_tokens off;
 
-    	location ~* \.php$ {
+    	location ~* \.php\$ {
         	root           /var/www/html;
         	try_files $uri =404;
         	fastcgi_pass   127.0.0.1:9000;
         	fastcgi_index  index.php;
-        	fastcgi_param  SCRIPT_FILENAME  /var/www/html$fastcgi_script_name;
+        	fastcgi_param  SCRIPT_FILENAME  /var/www/html\$fastcgi_script_name;
         	include        fastcgi_params;
         	fastcgi_buffers 16 16k;
         	fastcgi_buffer_size 32k;
@@ -143,8 +143,7 @@ configure_nginx() {
     	}
 EOL
 	sed -i 's/root/#root/g' /etc/nginx/nginx.conf;
-	sed -i 's/location/#location/g' /etc/nginx/nginx.conf;
-	sed -i 's/}$/#}/g' /etc/nginx/nginx.conf;
+	sed -i.bak '47d;48d' /etc/nginx/nginx.conf
 	service php-fpm restart;
 	service nginx restart;
 
@@ -157,7 +156,7 @@ configure_nginx_laravel() {
 		root   /var/www/html/laravel/public;
 		location / {
                 index index.php index.html index.htm;
-                try_files $uri $uri/ /index.php?$query_string;
+                try_files \$uri \$uri/ /index.php?\$query_string;
     	}	
 
     	add_header 'X-Frame-Options' 'DENY';
@@ -168,12 +167,29 @@ configure_nginx_laravel() {
 
     	server_tokens off;
 
-    	location ~* \.php$ {
+        location /phpmyadmin {
+            root /var/www/html;
+            index index.php;
+            location ~ ^/phpmyadmin/(.+\.php)\$ {
+                    try_files \$uri =404;
+                    root /var/www/html;
+                    fastcgi_pass 127.0.0.1:9000;
+                    fastcgi_index index.php;
+                    fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+                    include fastcgi_params;
+                    fastcgi_buffers 16 16k;
+                    fastcgi_buffer_size 32k;
+            }
+            location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))\$ {
+                    root /var/www/html;
+            }
+		}
+
+    	location ~ \.php\$ {
         	root           /var/www/html/laravel/public;
-        	try_files $uri =404;
         	fastcgi_pass   127.0.0.1:9000;
         	fastcgi_index  index.php;
-        	fastcgi_param  SCRIPT_FILENAME  /var/www/html/laravel/public$fastcgi_script_name;
+        	fastcgi_param  SCRIPT_FILENAME  /var/www/html/laravel/public\$fastcgi_script_name;
         	include        fastcgi_params;
         	fastcgi_buffers 16 16k;
         	fastcgi_buffer_size 32k;
@@ -187,11 +203,7 @@ configure_nginx_laravel() {
     	}
 EOL
 	sed -i 's/root/#root/g' /etc/nginx/nginx.conf;
-	sed -i 's/location/#location/g' /etc/nginx/nginx.conf;
-	sed -i 's/}$/#}/g' /etc/nginx/nginx.conf;
-	service php-fpm restart;
-	service nginx restart;
-
+	sed -i.bak '47d;48d' /etc/nginx/nginx.conf
 }
 
 install_laravel() {
@@ -202,6 +214,8 @@ install_laravel() {
 	composer create-project laravel/laravel /var/www/html/laravel;
 	chown nginx:nginx /var/www/html/ -R -f;
 	sed -i 's/;cgi\.fix_pathinfo=1/cgi\.fix_pathinfo=0/g' /etc/php.ini;
+	service php-fpm restart;
+	service nginx restart;
 }
 
 
