@@ -6,7 +6,7 @@ Bash Script for auto install nginx / php-fpm / MariaDB / phpMyAdmin / Laravel
 One line installation command: 
 
 ```
-curl -s https://github.com/areeb111/nmp-stack-kickstart/install.sh -o kickstart.sh && sh kickstart.sh && rm -f kickstart.sh
+curl -s https://raw.githubusercontent.com/areeb111/nmp-stack-kickstart/main/install.sh -o kickstart.sh && sh kickstart.sh && rm -f kickstart.sh
 ```
 
 There are 5 options to install your required stack.
