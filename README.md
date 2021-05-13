@@ -12,5 +12,6 @@ curl -s https://github.com/areeb111/nmp-stack-kickstart/install.sh -o kickstart.
 There are 5 options to install your required stack.
 
 PRs are welcome
+Tested on CentOS-7-x86_64-Minimal-2009
 
-NOTE: THIS IS NOT DESIGNED FOR PRODUCTION, PLEASE READ EVERY LINE BEFORE EXECUTING.
+NOTE: THIS INSTALLER IS NOT DESIGNED FOR PRODUCTION, PLEASE READ EVERY LINE BEFORE EXECUTING.
