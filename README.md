@@ -1,10 +1,9 @@
 # nmp-stack-kickstart
 nginx + PHP-FPM + MariaDB + phpMyAdmin + Laravel One Line Installer
 
-Bash Script for auto install nginx / php-fpm / MariaDB / phpMyAdmin / Laravel
+Bash script for auto install nginx / php-fpm / MariaDB / phpMyAdmin / Laravel on CentOS 7 minimal.
 
 One line installation command: 
-
 ```
 curl -s https://raw.githubusercontent.com/areeb111/nmp-stack-kickstart/main/install.sh -o kickstart.sh && sh kickstart.sh && rm -f kickstart.sh
 ```
