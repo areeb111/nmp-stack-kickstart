@@ -8,7 +8,7 @@ One line installation command:
 curl -s https://raw.githubusercontent.com/areeb111/nmp-stack-kickstart/main/install.sh -o kickstart.sh && sh kickstart.sh && rm -f kickstart.sh
 ```
 
-There are 5 options to install your required stack.
+There are 4 options to install your required stack.
 ![NMP Stack Screenshot](/screenshot.png?raw=true "NMP Stack Screenshot")
 
 
