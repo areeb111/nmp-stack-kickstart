@@ -8,7 +8,7 @@ One line installation command:
 curl -s https://raw.githubusercontent.com/areeb111/nmp-stack-kickstart/main/install.sh -o kickstart.sh && sh kickstart.sh && rm -f kickstart.sh
 ```
 
-There are 5 options to install your required stack.
+There are 4 options to install your required stack.
 ![NMP Stack Screenshot](/screenshot.png?raw=true "NMP Stack Screenshot")
 
 
@@ -17,4 +17,4 @@ There are 5 options to install your required stack.
 - Tested on CentOS-7-x86_64-Minimal-2009
 
 
-**NOTE: THIS INSTALLER IS NOT DESIGNED FOR PRODUCTION, PLEASE READ EVERY LINE BEFORE EXECUTING.**
+**NOTE: THIS INSTALLER IS NOT DESIGNED FOR PRODUCTION, PLEASE USE IT FOR DEVELOPMENT PURPOSES ONLY, OTHERWISE YOU WILL NEED TO ENABLE FIREWALL / SELINUX / ETC...**
