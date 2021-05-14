@@ -205,7 +205,10 @@ configure_nginx_laravel() {
     	}
 EOL
 	sed -i 's/root/#root/g' /etc/nginx/nginx.conf;
-	sed -i.bak '47d;48d' /etc/nginx/nginx.conf
+	sed -i.bak '47d;48d' /etc/nginx/nginx.conf;
+	service httpd stop;
+	chkconfig httpd off;
+	service nginx restart;
 }
 
 install_laravel() {
@@ -217,9 +220,6 @@ install_laravel() {
 	chown nginx:nginx /var/www/html/ -R -f;
 	sed -i 's/;cgi\.fix_pathinfo=1/cgi\.fix_pathinfo=0/g' /etc/php.ini;
 	service php-fpm restart;
-	service httpd stop;
-	chkconfig httpd off;
-	service nginx restart;
 }
 
 
