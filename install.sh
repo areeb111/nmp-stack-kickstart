@@ -84,12 +84,12 @@ install_php() {
 
 create_db() {
 	DBNAME="${1}"
-    DBUSER="${2}"
-    DBPASS="${3}"
+	DBUSER="${2}"
+	DBPASS="${3}"
 
 	#CREATING MYSQL USER WITH GRANT PRIVILEGES & DATABASE
-    mysql -e "CREATE USER '${DBUSER}'@'localhost' IDENTIFIED BY '${DBPASS}';"
-    mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${DBUSER}'@'localhost' with GRANT OPTION;"
+	mysql -e "CREATE USER '${DBUSER}'@'localhost' IDENTIFIED BY '${DBPASS}';"
+	mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${DBUSER}'@'localhost' with GRANT OPTION;"
 	mysql -e "CREATE DATABASE ${DBNAME}";
 	mysql -e "ALTER DATABASE ${DBNAME} DEFAULT CHARSET=utf8 COLLATE utf8_general_ci";
 
