@@ -88,8 +88,8 @@ create_db() {
     DBPASS="${3}"
 
 	#CREATING MYSQL USER WITH GRANT PRIVILEGES & DATABASE
-	mysql -e "CREATE USER ${DBUSER}@'localhost' IDENTIFIED BY ${DBPASS};"
-	mysql -e "GRANT ALL PRIVILEGES ON *.* TO ${DBUSER}@'localhost' with GRANT OPTION;"
+    mysql -e "CREATE USER '${DBUSER}'@'localhost' IDENTIFIED BY '${DBPASS}';"
+    mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${DBUSER}'@'localhost' with GRANT OPTION;"
 	mysql -e "CREATE DATABASE ${DBNAME}";
 	mysql -e "ALTER DATABASE ${DBNAME} DEFAULT CHARSET=utf8 COLLATE utf8_general_ci";
 
@@ -145,6 +145,8 @@ EOL
 	sed -i 's/root/#root/g' /etc/nginx/nginx.conf;
 	sed -i.bak '47d;48d' /etc/nginx/nginx.conf
 	service php-fpm restart;
+	service httpd stop;
+	chkconfig httpd off;
 	service nginx restart;
 
 }
@@ -215,6 +217,8 @@ install_laravel() {
 	chown nginx:nginx /var/www/html/ -R -f;
 	sed -i 's/;cgi\.fix_pathinfo=1/cgi\.fix_pathinfo=0/g' /etc/php.ini;
 	service php-fpm restart;
+	service httpd stop;
+	chkconfig httpd off;
 	service nginx restart;
 }
 
