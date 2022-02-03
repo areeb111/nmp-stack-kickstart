@@ -126,7 +126,7 @@ configure_nginx() {
 
     	location ~* \.php\$ {
         	root           /var/www/html;
-        	try_files $uri =404;
+        	try_files \$uri =404;
         	fastcgi_pass   127.0.0.1:9000;
         	fastcgi_index  index.php;
         	fastcgi_param  SCRIPT_FILENAME  /var/www/html\$fastcgi_script_name;
